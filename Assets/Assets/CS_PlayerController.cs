@@ -77,7 +77,7 @@ public class CS_PlayerController : MonoBehaviour
 
     private void Update()
     {
-        moveInput = playerInputActions.Player.ReadValue<Vector2>();
+        moveInput = playerInputActions.Player.Move.ReadValue<Vector2>();
 
         // Continuously update the hue for the trail's rainbow effect.
         currentHue += Time.deltaTime * 0.2f;
@@ -90,7 +90,7 @@ public class CS_PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        rb.velocity = moveDirection.normalized * moveSpeed;
+        rb.linearVelocity = moveDirection.normalized * moveSpeed;
 
         // Spawn a trail sphere if the player is moving and the spawn cooldown has passed.
         if (moveDirection.sqrMagnitude > 0.1f && Time.time >= nextSpawnTime)
