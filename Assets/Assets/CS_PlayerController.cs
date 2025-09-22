@@ -90,9 +90,7 @@ public class CS_PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        
-        // This is the standard and correct way to move a Rigidbody with Input System data.
-        rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
+        rb.velocity = moveDirection.normalized * moveSpeed;
 
         // Spawn a trail sphere if the player is moving and the spawn cooldown has passed.
         if (moveDirection.sqrMagnitude > 0.1f && Time.time >= nextSpawnTime)
